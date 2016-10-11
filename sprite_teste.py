@@ -1,15 +1,20 @@
 # -*- coding: utf-8 -*-
-#from pygame.locals import *
+from pygame.locals import *
 
 #importando random para gerar algumas variáveis
-from random import randint
+#from random import randint
 
 #importando a classe "Pato"
 from classes.pato import *
 
-#Inicia o PyGame
+#Iniciando o PyGame
 pygame.init()
 
+#definindo a resolução da tela
+janela = pygame.display.set_mode((1280, 600))
+
+
+'''
 patoA = Pato(lvl_velocidade, 0, 1, lvl_tamanho)
 patoB = Pato(lvl_velocidade, 0, 1, lvl_tamanho)
 patoC = Pato(lvl_velocidade, 0, 1, lvl_tamanho)
@@ -28,4 +33,4 @@ print patoC.velocidade
 print patoC.tamanho
 print patoC.cor
 print "x=",patoC.x_pos,"  y=",patoC.y_pos
-
+'''
