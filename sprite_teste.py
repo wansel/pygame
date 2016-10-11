@@ -1,11 +1,17 @@
 # -*- coding: utf-8 -*-
+import pygame, sys, os, time, random
 from pygame.locals import *
 
 #importando random para gerar algumas variáveis
-#from random import randint
+from random import randint
 
 #importando a classe "Pato"
 from classes.pato import *
+from classes.objeto import *
+
+#Cores
+branco = (255, 255, 255)
+
 
 #Iniciando o PyGame
 pygame.init()
@@ -13,24 +19,23 @@ pygame.init()
 #definindo a resolução da tela
 janela = pygame.display.set_mode((1280, 600))
 
+#Definindo o plano de fundo do jogo
+caminho = os.path.join("imagens", "stage_01.png")
+fundo = pygame.image.load(caminho).convert_alpha()
+#patoA = Pato()
+janela.fill(branco)
 
-'''
-patoA = Pato(lvl_velocidade, 0, 1, lvl_tamanho)
-patoB = Pato(lvl_velocidade, 0, 1, lvl_tamanho)
-patoC = Pato(lvl_velocidade, 0, 1, lvl_tamanho)
 
-print patoA.velocidade
-print patoA.tamanho
-print patoB.cor
-print "x=",patoA.x_pos,"  y=",patoA.y_pos
+running = True
+while running:
+    for evento in pygame.event.get():
+        if (evento.type == QUIT):
+	    	running = False
+	if (evento.type == pygame.MOUSEBUTTONDOWN):
+		pass
+	if (evento.type == pygame.MOUSEBUTTONUP):
+	  	pass
 
-print patoB.velocidade
-print patoB.tamanho
-print patoB.cor
-print "x=",patoB.x_pos,"  y=",patoB.y_pos
-
-print patoC.velocidade
-print patoC.tamanho
-print patoC.cor
-print "x=",patoC.x_pos,"  y=",patoC.y_pos
-'''
+    pygame.display.flip()
+pygame.display.quit()
+sys.exit()

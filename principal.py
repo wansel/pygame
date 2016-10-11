@@ -14,11 +14,13 @@ pygame.init()
 janela = pygame.display.set_mode((1280, 600))
 
 #colocando o plano de fundo do jogo
-caminho = os.path.join("images", "sky.png")
+caminho = os.path.join("imagens", "stage_01.png")
 ceu = pygame.image.load(caminho).convert_alpha()
 
-caminho = os.path.join("images", "duck1.gif")
+caminho = os.path.join("imagens", "pato_exemplo.png")
 pato = pygame.image.load(caminho).convert_alpha()
+#aux = pygame.Surface((15, 15))
+pygame.transform.scale(pato, (15px, 15px))
 
 janela.fill(branco)
 pygame.display.flip()
@@ -29,16 +31,16 @@ x = 640 #talvez editar os valores de x e y
 y = 150
 parede = 1
 teto = 1    
-
-musica = pygame.mixer.music
-musica.load("shotgun.mp3")
+'''Estou sem o arquivo de aúdio!'''
+#musica = pygame.mixer.music
+#musica.load("shotgun.mp3")
 
 segurar = False
 
 
-
+running = True
 while running:
-    global running
+    
     for event in pygame.event.get():
         if (event.type == QUIT):
 	    running = False
@@ -62,11 +64,12 @@ while running:
     janela.blit(pato, (x, y))
     
     if segurar:
-        musica.play()
+        #musica.play()
+        pass
     
     pygame.display.flip()
 
-   
-pygame.mixer.music.stop()
+'''Estou sem o arquivo de aúdio!'''
+#pygame.mixer.music.stop()
 pygame.display.quit()
 sys.exit()
