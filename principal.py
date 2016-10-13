@@ -20,7 +20,7 @@ ceu = pygame.image.load(caminho).convert_alpha()
 caminho = os.path.join("imagens", "pato_exemplo.png")
 pato = pygame.image.load(caminho).convert_alpha()
 #aux = pygame.Surface((15, 15))
-pygame.transform.scale(pato, (15px, 15px))
+pygame.transform.scale(pato, (15, 15))
 
 janela.fill(branco)
 pygame.display.flip()
