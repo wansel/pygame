@@ -22,7 +22,7 @@ janela = pygame.display.set_mode((1280, 600))
 #Definindo o plano de fundo do jogo
 caminho = os.path.join("imagens", "stage_01.png")
 fundo = pygame.image.load(caminho).convert_alpha()
-#patoA = Pato()
+patoA = Pato()
 janela.fill(branco)
 
 
@@ -35,7 +35,9 @@ while running:
 		pass
 	if (evento.type == pygame.MOUSEBUTTONUP):
 	  	pass
-
+	janela.blit(fundo, (0, 0))
+    janela.blit(patoA.aux, patoA.movimentar())
     pygame.display.flip()
+
 pygame.display.quit()
 sys.exit()
