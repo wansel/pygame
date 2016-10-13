@@ -4,11 +4,11 @@
 class Tela:
 	width = 1280
 	height = 600
-	__init__(self):
+	def __init__(self):
 		pass
-	getSize():
+	def getSize(self):
 		return (self.width, self.height)
-	getWidth():
+	def getWidth():
 		return self.width
-	getHeight:
+	def getHeight():
 		return self.height

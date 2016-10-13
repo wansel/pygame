@@ -2,10 +2,11 @@
 #from pygame.locals import *
 from random import randint
 from objeto import *
-from classes import *
+from tela import *
+#from classes import *
 #Inicia o PyGame
 #pygame.init()
-lvl_velocidade = 3
+lvl_velocidade = 1
 lvl_tamanho = 100
 
 class Pato:
@@ -13,9 +14,9 @@ class Pato:
 	tamanho = None
 	ponto_de_vida = None
 	cor = None
-	x_pos = randint(0,)
-	y_pos = None
-	aux = None
+	x_pos = randint(0,1280)
+	y_pos = 600
+	#aux = None
 	'''imagem = Objeto("pato_exemplo.png")'''
 
 	def __init__(self):
@@ -24,10 +25,10 @@ class Pato:
 		self.ponto_de_vida = 1 #Número de balas que o pato precisará para morrer
 		self.tamanho = lvl_tamanho * float(randint(7,13)/float(10))
 		#posição do pato
-		self.x_pos = randint(0,600)
-		self.y_pos = 0
+		#self.x_pos = randint(0,600)
+		#self.y_pos = 0
 		caminho = os.path.join("imagens", "pato_exemplo.png")
-		self.aux = pygame.image.load(caminho).convert_alpha()
+		#self.aux = pygame.image.load(caminho).convert_alpha()
 		#caminho = os.path.join("imagens", "pato_exemplo.png")
 		#pato = pygame.image.load(caminho).convert_alpha()
 
@@ -43,20 +44,33 @@ class Pato:
 		return self.velocidade
 	def stringVelocidade():
 		return "Pato tem {} de velocidade".format(self.getVelocidade)
+
 	def movimentar(self, tela):
 		#especifica o tamanho do pato (com as bordas da imagem).
 		#se não estiver tocando na borda, então movimente, se tocar na aborda, mude a direção.
 		#aumente o contador para tirar o pato da tela.
-		if(self.x_pos<tela.width):
-			self.x_pos += velocidade
+		if(self.x_pos>0 and self.x_pos<tela.width):
+			self.x_pos = self.x_pos + lvl_velocidade
 		else:
-			self.x_pos += (velocidade * -1)
-		if(self.y_pos<tela.height):
-			self.y_pos += velocidade
+			self.x_pos = self.x_pos - lvl_velocidade
+		if(self.y_pos>0 and self.y_pos<tela.height):
+			self.y_pos = self.y_pos + lvl_velocidade
 		else:
-			self.y_pos += (velocidade * -1)
-	return (self.x_pos, self.y_pos)
+			self.y_pos = self.y_pos - lvl_velocidade
+		#return (self.x_pos, self.y_pos)
+		return (self.x_pos, self.y_pos)
 
+
+PatoA = Pato()
+tela = Tela()
+print PatoA.movimentar(tela)
+print PatoA.movimentar(tela)
+print PatoA.movimentar(tela)
+print PatoA.movimentar(tela)
+print PatoA.movimentar(tela)
+print PatoA.movimentar(tela)
+print PatoA.movimentar(tela)
+print PatoA.movimentar(tela)
 
 '''
 #instanciação dos patos teste
