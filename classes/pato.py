@@ -6,19 +6,19 @@ from tela import *
 #from classes import *
 #Inicia o PyGame
 #pygame.init()
-lvl_velocidade = 3
+lvl_velocidade = 1
 lvl_tamanho = 100
 
 
 class Pato:
-	velocidade = None # recurso não implementado
-	tamanho = None #recurso não implementado
-	ponto_de_vida = None #recurso não implementado
-	cor = None #recurso não implementado
-	x_pos = randint(0,1280) #posição do pato no eixo x
-	y_pos = 600 #posição do pato no eixo y
-	xFly = lvl_velocidade # variável que controla a direção do pato
-	yFly = lvl_velocidade # variável que controla a direção do pato no eixo X
+	#velocidade = None # recurso não implementado
+	#tamanho = None #recurso não implementado
+	#ponto_de_vida = None #recurso não implementado
+	#cor = None #recurso não implementado
+	#x_pos = randint(0,1280) #posição do pato no eixo x
+	#y_pos = 600 #posição do pato no eixo y
+	#xFly = lvl_velocidade # variável que controla a direção do pato
+	#yFly = lvl_velocidade # variável que controla a direção do pato no eixo X
 	#aux = None
 	'''imagem = Objeto("pato_exemplo.png")'''
 
@@ -28,10 +28,12 @@ class Pato:
 		self.ponto_de_vida = 1 #Número de balas que o pato precisará para morrer
 		self.tamanho = lvl_tamanho * float(randint(7,13)/float(10))
 		#posição do pato
-		self.x_pos = randint(0,600)
-		self.y_pos = 0
+		self.x_pos = randint(0,1280)
+		self.y_pos = 600
 		caminho = os.path.join("imagens", "pato_exemplo.png")
 		self.aux = pygame.image.load(caminho).convert_alpha()
+		self.xFly = lvl_velocidade
+		self.yFly = lvl_velocidade
 		#caminho = os.path.join("imagens", "pato_exemplo.png")
 		#pato = pygame.image.load(caminho).convert_alpha()
 
@@ -52,13 +54,16 @@ class Pato:
 		#especifica o tamanho do pato (com as bordas da imagem).
 		#se não estiver tocando na borda, então movimente, se tocar na aborda, mude a direção.
 		#aumente o contador para tirar o pato da tela.
+		move = randint(0,100)
+		#if(move==15):
+		#	self.xFly *= -1
 		if(self.x_pos<=0):
 			self.xFly = lvl_velocidade
 		elif(self.x_pos>=tela.width):
 			self.xFly = (lvl_velocidade * -1)
 		if(self.y_pos<=0):
 			self.yFly = lvl_velocidade
-		elif(self.y_pos>=tela.width):
+		elif(self.y_pos>=tela.height):
 			self.yFly = (lvl_velocidade * -1)
 		self.x_pos += self.xFly
 		self.y_pos += self.yFly
