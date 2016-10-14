@@ -71,6 +71,12 @@ print PatoA.movimentar(tela)
 print PatoA.movimentar(tela)
 print PatoA.movimentar(tela)
 print PatoA.movimentar(tela)
+print PatoA.movimentar(tela)
+print PatoA.movimentar(tela)
+print PatoA.movimentar(tela)
+print PatoA.movimentar(tela)
+print PatoA.movimentar(tela)
+print PatoA.movimentar(tela)
 
 '''
 #instanciação dos patos teste
