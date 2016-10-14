@@ -42,10 +42,11 @@ while running:
 	if (evento.type == pygame.MOUSEBUTTONUP):
 		novoPato = Pato()
 		patos.append(novoPato)
+	pygame.display.flip()'''
 	if (evento.type == pygame.KEYDOWN):
 		novoPato = Pato()
 		patos.append(novoPato)
-	pygame.display.flip()'''
+	
 	janela.blit(fundo, (0, 0))
 	for x in patos:
 		aux2 = x.movimentar(tela)
