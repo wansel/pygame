@@ -6,7 +6,7 @@ from tela import *
 #from classes import *
 #Inicia o PyGame
 #pygame.init()
-lvl_velocidade = 1
+lvl_velocidade = 3
 lvl_tamanho = 100
 
 
@@ -54,9 +54,15 @@ class Pato:
 		#especifica o tamanho do pato (com as bordas da imagem).
 		#se não estiver tocando na borda, então movimente, se tocar na aborda, mude a direção.
 		#aumente o contador para tirar o pato da tela.
-		move = randint(0,100)
-		#if(move==15):
-		#	self.xFly *= -1
+		move = randint(0,200)
+		if(move==15):
+			self.xFly *= -1
+		if(move==20):
+			self.yFly *= -1
+		if(move==25):
+			self.xFly *= -1
+			self.yFly *= -1
+
 		if(self.x_pos<=0):
 			self.xFly = lvl_velocidade
 		elif(self.x_pos>=tela.width):

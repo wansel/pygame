@@ -31,12 +31,12 @@ patos = []
 #patos.append(patoA)
 janela.fill(branco)
 
-seconds = 0
+#seconds = 0
 running = True
 while running:
 	for event in pygame.event.get():
-		if(pygame.time.set_timer(1, 1000)):
-			patos.append(Pato())
+		#if(pygame.time.set_timer(1, 1000)):
+		#	patos.append(Pato())
 		if (event.type == pygame.KEYDOWN):
 			novoPato = Pato()
 			patos.append(novoPato)
@@ -48,7 +48,7 @@ while running:
 	for x in patos:
 		aux2 = x.movimentar(tela)
 		janela.blit(x.aux, aux2)
-		print seconds
+		#print seconds
     #janela.blit(patoA.aux, patoA.movimentar(Tela))
 	pygame.display.flip()
     #novoPato = None
