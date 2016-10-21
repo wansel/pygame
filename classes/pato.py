@@ -51,24 +51,22 @@ class Pato:
 		#x++
 		##if(x1>x2 and y1>y2+tolerancia):
 		if(self.hit == False):
-			if(self.cor==0 and tempo<60):
-				return (82, 246, 66, 40) #(82, 246, 66, 40),(82, 246, 66, 40)
-			elif(self.cor==0 and 60<=tempo<=120):
-				return (82, 246, 66, 40)
-			elif(self.cor==0 and 120<tempo<=180):
-				return (82, 246, 66, 40)
-			if(self.cor==1):
-				return (262, 242, 66, 48)
-			else:
-				return (522, 242, 66, 48)
+			if(tempo<20):
+				return (2, 246, 66, 56) #(82, 246, 66, 40),(82, 246, 66, 40)
+			elif(20<=tempo<=40):
+				return (82, 246, 66, 56)
+			elif(40<tempo<=60):
+				return (162, 246, 66, 56)	
 		else:
 			return (6, 476, 54, 58)
+			'''
 		#if(x1>x2)
 		#[82, 246, 66, 40],[82, 246, 66, 40],[82, 246, 66, 40]
 		#y++
 		#[82, 246, 66, 40],[82, 246, 66, 40],[82, 246, 66, 40]
 		#x++, y++
 		#[82, 246, 66, 40],[82, 246, 66, 40],[82, 246, 66, 40]
+		'''
 	def movimentar(self, tela):
 		#especifica o tamanho do pato (com as bordas da imagem).
 		#se não estiver tocando na borda, então movimente, se tocar na aborda, mude a direção.

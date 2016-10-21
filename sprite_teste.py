@@ -45,10 +45,11 @@ mousePositionX = 0
 mousePositionY = 0
 
 pontuacao = 10
-texto2 = Texto("Olá",32,branco,(100,100))
+textoInicial = Texto("Mate os patos ate atingir 100pts",32,branco,(100,100))
 score = Texto("{}pt".format(pontuacao), 22, branco,(10,tela.getHeight()-40))
 aviso = Texto("",32, branco, (0,0))
 acertou = False
+anima = 0
 #incrementar a velocidade do pato a cada tiro?
 patosNaTela = Texto("", 22, branco, (0,0))
 while running:
@@ -62,6 +63,7 @@ while running:
 			click = True
 			mousePositionX,mousePositionY = pygame.mouse.get_pos()
 	janela.blit(fundo, (0, 0))
+	anima += 1
 	tick+=1
 	segundo = int(tick/float(60))
 	if(segundo<5):
@@ -73,10 +75,9 @@ while running:
 		aviso.update("Chegue aos 100pt")
 	elif(segundo>14):
 		aviso = None
-	if(tick==passo and passo>=10):
+	if(tick%300==0):
 		patos.append(Pato())
 		tick==0
-		passo-= 5
 		print "passo{}".format(passo)
 	if(click):
 		shot.play
@@ -110,7 +111,7 @@ while running:
 		print tick/60
 	for x in patos:
 		if(x.y_pos<=610):
-			janela.blit(x.surface, x.movimentar(tela), x.nextSprite(tick))
+			janela.blit(x.surface, x.movimentar(tela), x.nextSprite(anima))
 			pygame.transform.flip(x.surface, True, False)
 		else:
 			patos.remove(x)
@@ -118,9 +119,11 @@ while running:
 	janela.blit(patosNaTela.surface, (10,10))
 	janela.blit(score.surface, (10,tela.getHeight()-score.surface.get_height()-5))
 	#janela.blit(texto, (50,(tela.getHeight())-20))
-	janela.blit(texto2.surface, (tela.getWidth()/2-texto2.surface.get_width()-2,tela.getHeight()/2))
+	janela.blit(textoInicial.surface, (tela.getWidth()/2-texto2.surface.get_width()-2,tela.getHeight()/2))
 	#janela.blit(patoA.aux, patoA.movimentar(Tela))
 	pygame.display.set_caption('Duck Hunt - {}'.format(segundo))
+	if(anima>=60):
+		anima = 0
 	pygame.display.flip()
 	#novoPato = None
 
