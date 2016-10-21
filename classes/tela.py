@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-
-#Padrão Singleton na tela, para garatir que exista apenas uma instância da mesma
 class Tela:
 	width = 1280
 	height = 600
@@ -8,7 +6,7 @@ class Tela:
 		pass
 	def getSize(self):
 		return (self.width, self.height)
-	def getWidth():
+	def getWidth(self):
 		return self.width
-	def getHeight():
+	def getHeight(self):
 		return self.height

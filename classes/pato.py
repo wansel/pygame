@@ -1,84 +1,117 @@
 # -*- coding: utf-8 -*-
-#from pygame.locals import *
+from pygame.locals import *
+import pygame, sys, os, time, random
 from random import randint
 from objeto import *
 from tela import *
 #from classes import *
+
 #Inicia o PyGame
 #pygame.init()
 lvl_velocidade = 3
 lvl_tamanho = 100
 
-
 class Pato:
-	#velocidade = None # recurso não implementado
-	#tamanho = None #recurso não implementado
-	#ponto_de_vida = None #recurso não implementado
-	#cor = None #recurso não implementado
-	#x_pos = randint(0,1280) #posição do pato no eixo x
-	#y_pos = 600 #posição do pato no eixo y
-	#xFly = lvl_velocidade # variável que controla a direção do pato
-	#yFly = lvl_velocidade # variável que controla a direção do pato no eixo X
-	#aux = None
-	'''imagem = Objeto("pato_exemplo.png")'''
-
+	patoSprite = [(82, 246, 66, 40),(82, 246, 66, 40),(82, 246, 66, 40)]
+	sprite = 0
 	def __init__(self):
-		self.velocidade = lvl_velocidade * randint(1,3)
+		self.velocidade = 3 * randint(1,3)
 		self.cor = 0
 		self.ponto_de_vida = 1 #Número de balas que o pato precisará para morrer
 		self.tamanho = lvl_tamanho * float(randint(7,13)/float(10))
 		#posição do pato
-		self.x_pos = randint(0,1280)
+		self.x_pos = randint(0+66,1280-48)
 		self.y_pos = 600
-		caminho = os.path.join("imagens", "pato_exemplo.png")
-		self.aux = pygame.image.load(caminho).convert_alpha()
+		caminho = os.path.join("sprites", "sprite.png")
+		self.surface = pygame.image.load(caminho).convert_alpha()
 		self.xFly = lvl_velocidade
 		self.yFly = lvl_velocidade
-		#caminho = os.path.join("imagens", "pato_exemplo.png")
-		#pato = pygame.image.load(caminho).convert_alpha()
+		self.xNext = 0
+		self.yNext = 0
+		self.cor = randint(0,2)
+		self.hit = False
 
-	'''def __init__(self ,velocidade, cor, ponto_de_vida, tamanho):
-		self.velocidade = velocidade * randint(1,3)
-		self.cor = cor
-		self.ponto_de_vida = ponto_de_vida #Número de balas que o pato precisará para morrer
-		self.tamanho = tamanho * float(randint(7,13)/float(10))
-		#posição do pato
-		self.x_pos = randint(0,600)
-		self.y_pos = 0'''
-	def getVelocidade():
+	def getPosicao(self):
+		return (self.x_pos, self.y_pos)
+	def getVelocidade(self):
 		return self.velocidade
-	def stringVelocidade():
+	def stringVelocidade(self):
 		return "Pato tem {} de velocidade".format(self.getVelocidade)
+	def area(self,x,y):
+		if(x>self.x_pos-(66/2) and x<self.x_pos+(66/2) and y>self.y_pos-(40/2) and y<self.y_pos+(40/2)):
+			return True
+		else:
+			return False
 
+
+	def nextSprite(self, tempo):
+		#print self.x_pos
+		#print self.y_pos
+		tolerancia = 9 #quando o nível de avanço para  que o sprite mude?
+		#x++
+		##if(x1>x2 and y1>y2+tolerancia):
+		if(self.hit == False):
+			if(self.cor==0 and tempo<60):
+				return (82, 246, 66, 40) #(82, 246, 66, 40),(82, 246, 66, 40)
+			elif(self.cor==0 and 60<=tempo<=120):
+				return (82, 246, 66, 40)
+			elif(self.cor==0 and 120<tempo<=180):
+				return (82, 246, 66, 40)
+			if(self.cor==1):
+				return (262, 242, 66, 48)
+			else:
+				return (522, 242, 66, 48)
+		else:
+			return (6, 476, 54, 58)
+		#if(x1>x2)
+		#[82, 246, 66, 40],[82, 246, 66, 40],[82, 246, 66, 40]
+		#y++
+		#[82, 246, 66, 40],[82, 246, 66, 40],[82, 246, 66, 40]
+		#x++, y++
+		#[82, 246, 66, 40],[82, 246, 66, 40],[82, 246, 66, 40]
 	def movimentar(self, tela):
 		#especifica o tamanho do pato (com as bordas da imagem).
 		#se não estiver tocando na borda, então movimente, se tocar na aborda, mude a direção.
 		#aumente o contador para tirar o pato da tela.
-		move = randint(0,200)
+		
+		#comportamentos do voo do pato
+		move = randint(0,400)
+		'''
 		if(move==15):
 			self.xFly *= -1
-		if(move==20):
+		elif(move==20):
 			self.yFly *= -1
-		if(move==25):
+		elif(move==25):
 			self.xFly *= -1
 			self.yFly *= -1
+		elif(move==30):
+			self.xFly += lvl_velocidade
+		elif(move==35):
+			self.yFly += lvl_velocidade
+		elif(move==40):
+			self.xFly += lvl_velocidade
+			self.yFly += lvl_velocidade
+		'''
+		if(self.hit==False):
+			if(self.x_pos<=0):
+				self.xFly = lvl_velocidade
+			elif(self.x_pos>=tela.width-15):
+				self.xFly = (lvl_velocidade * -1)
+				
+			if(self.y_pos<=0):
+				self.yFly = lvl_velocidade  * randint(1,2)
+			elif(self.y_pos>=tela.height-15):
+				self.yFly = (lvl_velocidade * -1) * randint(1,2)
+				pygame.transform.flip(self.surface, False, True)
+			self.x_pos += self.xFly
+			self.y_pos += self.yFly
+			return (self.x_pos, self.y_pos)
+		else:
+			if(self.yFly<0):
+				self.yFly*= -1
+			self.yFly == 30
+			self.y_pos += self.yFly
+			return (self.x_pos, self.y_pos)
 
-		if(self.x_pos<=0):
-			self.xFly = lvl_velocidade
-		elif(self.x_pos>=tela.width):
-			self.xFly = (lvl_velocidade * -1)
-		if(self.y_pos<=0):
-			self.yFly = lvl_velocidade
-		elif(self.y_pos>=tela.height):
-			self.yFly = (lvl_velocidade * -1)
-		self.x_pos += self.xFly
-		self.y_pos += self.yFly
-		return (self.x_pos, self.y_pos)
-'''
-PatoA = Pato()
-tela = Tela()
-
-for x in range(700):
-	print PatoA.movimentar(tela),
-
-'''
+	def kill(self):
+		self.hit = True
